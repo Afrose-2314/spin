@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 50px;
+      background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+    }
+    h1 {
+      color: #0d47a1;
+    }
+    #question {
+      font-size: 32px;
+      margin: 30px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      font-size: 20px;
+      padding: 10px;
+      width: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #score, #timer {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>➕ Math Game</h1>
+  <div id="question">Loading...</div>
+  <input type="number" id="answer" placeholder="Your answer">
+  <button onclick="checkAnswer()">Submit</button>
+
+  <div id="score">Score: 0</div>
+  <div id="timer">Time Left: 60s</div>
+
+  <script>
+    let num1, num2, correctAns;
+    let score = 0;
+    let timeLeft = 60;
+
+    function generateQuestion() {
+      num1 = Math.floor(Math.random() * 20) + 1;
+      num2 = Math.floor(Math.random() * 20) + 1;
+      correctAns = num1 + num2;
+      document.getElementById("question").innerText = `${num1} + ${num2} = ?`;
+      document.getElementById("answer").value = "";
+    }
+
+    function checkAnswer() {
+      const userAns = parseInt(document.getElementById("answer").value);
+      if (userAns === correctAns) {
+        score++;
+        document.getElementById("score").innerText = "Score: " + score;
+      }
+      generateQuestion();
+    }
+
+    function startTimer() {
+      const timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = "Time Left: " + timeLeft + "s";
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          alert(`Time's up! Your final score is ${score}`);
+          window.location.href = "index.html";
+        }
+      }, 1000);
+    }
+
+    generateQuestion();
+    startTimer();
+  </script>
+</body>
+</html>
