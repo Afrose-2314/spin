@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f8ff;
+  text-align: center;
+}
+
+.login-container {
+  margin-top: 100px;
+}
+
+.login-container input {
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.main-container {
+  padding-top: 50px;
+}
+
+.wheel-container {
+  position: relative;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+}
+
+#wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 10px solid #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: none;
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform 4s ease-out;
+}
+
+.option {
+  position: absolute;
+  font-size: 2rem;
+  transform-origin: 50% 150px;
+}
+
+.option:nth-child(1) { transform: rotate(0deg); top: 10%; left: 42%; }
+.option:nth-child(2) { transform: rotate(72deg); top: 20%; right: 15%; }
+.option:nth-child(3) { transform: rotate(144deg); bottom: 15%; right: 15%; }
+.option:nth-child(4) { transform: rotate(216deg); bottom: 15%; left: 15%; }
+.option:nth-child(5) { transform: rotate(288deg); top: 20%; left: 15%; }
+
+#spinBtn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  margin: 20% auto;
+  width: 300px;
+  border-radius: 12px;
+}
