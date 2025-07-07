@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Memory Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .memory-container {
+      display: grid;
+      grid-template-columns: repeat(4, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin-top: 50px;
+    }
+    .card {
+      width: 100px;
+      height: 100px;
+      background: #aaa;
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>🧠 Memory Match Game</h2>
+  <p id="timer">⏱️ 60</p>
+  <div class="memory-container" id="gameBoard"></div>
+
+  <script>
+    const emojis = ['🍎', '🍌', '🍇', '🍒', '🍎', '🍌', '🍇', '🍒'];
+    let shuffled = emojis.sort(() => 0.5 - Math.random());
+    let firstCard = null;
+    let secondCard = null;
+    let matched = 0;
+    let timeLeft = 60;
+
+    const board = document.getElementById('gameBoard');
+    shuffled.forEach((emoji, i) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.dataset.index = i;
+      card.dataset.emoji = emoji;
+      card.innerText = "";
+      card.onclick = () => flipCard(card);
+      board.appendChild(card);
+    });
+
+    function flipCard(card) {
+      if (card.innerText || secondCard) return;
+      card.innerText = card.dataset.emoji;
+
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        secondCard = card;
+        setTimeout(() => {
+          if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+            matched += 1;
+            if (matched === emojis.length / 2) {
+              alert("🎉 You matched all!");
+              window.location.href = "index.html";
+            }
+          } else {
+            firstCard.innerText = "";
+            secondCard.innerText = "";
+          }
+          firstCard = null;
+          secondCard = null;
+        }, 600);
+      }
+    }
+
+    function startTimer() {
+      const interval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          alert("⏱️ Time's up!");
+          window.location.href = "index.html";
+        }
+      }, 1000);
+    }
+
+    startTimer();
+  </script>
+</body>
+</html>
