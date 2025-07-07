@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SpinPlayEnjoy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main-container">
+    <h1>🎡 Spin & Play 🎯</h1>
+    <div class="wheel-container">
+      <div id="wheel" class="wheel">
+        <div class="option">🎨</div>
+        <div class="option">🔢</div>
+        <div class="option">🧠</div>
+        <div class="option">🎯</div>
+        <div class="option">🔍</div>
+      </div>
+      <button id="spinBtn" onclick="spinWheel()">SPIN</button>
+    </div>
+  </div>
+
+  <!-- Modal for instructions -->
+  <div id="instructionModal" class="modal">
+    <div class="modal-content">
+      <p id="instructionText"></p>
+      <button onclick="startGame()">OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
