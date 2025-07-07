@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Typing Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .typing-container { margin-top: 100px; }
+    #word { font-size: 28px; margin: 10px; }
+    #score { font-size: 20px; }
+  </style>
+</head>
+<body>
+  <div class="typing-container">
+    <h2>🎯 Typing Game</h2>
+    <p id="timer">⏱️ 60</p>
+    <p id="word"></p>
+    <input type="text" id="inputBox" placeholder="Type the word" onkeyup="checkTyping(event)">
+    <p id="score">Score: 0</p>
+  </div>
+
+  <script>
+    const words = ["Never Believe anyone","Believe God","Typing is cool","Hello world","Practice makes perfect","Spinning is fun","Python Programming Language"];
+    let current = "", score = 0, timeLeft = 60;
+
+    function newWord() {
+      current = words[Math.floor(Math.random() * words.length)];
+      document.getElementById("word").innerText = current;
+    }
+
+    function checkTyping(event) {
+      if (event.key === "Enter") {
+        const input = document.getElementById("inputBox").value.trim();
+        if (input === current) {
+          score++;
+          document.getElementById("score").innerText = "Score: " + score;
+        }
+        document.getElementById("inputBox").value = "";
+        newWord();
+      }
+    }
+
+    function startTimer() {
+      const interval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          alert(`Time's up! Your score: ${score}`);
+          window.location.href = "index.html";
+        }
+      }, 1000);
+    }
+
+    newWord();
+    startTimer();
+  </script>
+</body>
+</html>
