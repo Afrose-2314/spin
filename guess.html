@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Guess Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .guess-game { margin-top: 100px; }
+    #message { font-weight: bold; margin: 10px; font-size: 20px; color: green; }
+  </style>
+</head>
+<body>
+  <div class="guess-game">
+    <h2>🔢 Guess The Number</h2>
+    <p>Guess a number between 1 and 100</p>
+    <input type="number" id="guessInput" placeholder="Your guess">
+    <button onclick="checkGuess()">Submit</button>
+    <p id="message"></p>
+    <p id="timer">⏱️ 60</p>
+  </div>
+
+  <script>
+    const number = Math.floor(Math.random() * 100) + 1;
+    let timeLeft = 60;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      const msg = document.getElementById("message");
+      if (guess === number) {
+        msg.innerText = "🎉 Correct! You guessed it!";
+        setTimeout(() => window.location.href = "index.html", 2000);
+      } else if (guess < number) {
+        msg.innerText = "Try Higher!";
+      } else {
+        msg.innerText = "Try Lower!";
+      }
+    }
+
+    function startTimer() {
+      const interval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = `⏱️ ${timeLeft}`;
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          alert("Time's up!");
+          window.location.href = "index.html";
+        }
+      }, 1000);
+    }
+
+    startTimer();
+  </script>
+</body>
+</html>
